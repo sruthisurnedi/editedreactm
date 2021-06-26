@@ -161,6 +161,7 @@ const bcryptjs=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 const checkToken=require("./middlewares/verifyToken");
 const multerObj=require('./middlewares/fileUpload')
+require('dotenv').config()
 
 //install body parser
 userApi.use(exp.json());
@@ -264,7 +265,7 @@ userApi.post("/login", expressErrorHandler( async(req,res,next)=>{
         }
         else{
             //create and send token
-            let token= await jwt.sign({username:credentials.username},'abcdef',{expiresIn: 10 })
+            let token= await jwt.sign({username:credentials.username},process.env.SECRET,{expiresIn: 10 })
             //send token to client
             res.send({message:"Login success",token:token,username:credentials.username})
         }

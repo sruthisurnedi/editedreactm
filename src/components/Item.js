@@ -9,7 +9,7 @@ export default function Items(props){
                 <h4 className="text-dark">Price : {productObj.price}</h4>
                 <h4 className="text-dark">Brand :{productObj.brand}</h4>
                 <div class="d-flex float-end">
-                    <button type="button" class="btn btn-sm btn-info">Buy</button>
+                    <button type="button" class="btn btn-sm btn-info" onClick={()=>props.addProductToCart(productObj)}>Buy</button>
                 </div>
             </div>
 

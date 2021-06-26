@@ -26,7 +26,7 @@
 const exp=require('express')
 const app=exp();
 const path = require("path");
-
+require('dotenv').config();
 
 //connect front end backend
 app.use(exp.static(path.join(__dirname, './build/')))
@@ -67,10 +67,13 @@ mc.connect(databaseUrl,{useNewUrlParser:true,useUnifiedTopology:true},(err,clien
         let productCollectionObj=databaseObj.collection("productcollection")
         let userCollectionObj=databaseObj.collection("usercollection")
         let adminCollectionObj=databaseObj.collection("admincollection")
+        let userCartCollectionObj=databaseObj.collection("usercartcollection")
+
         //saving collection to api
         app.set("productCollectionObj",productCollectionObj)
         app.set("userCollectionObj",userCollectionObj)
         app.set("adminCollectionObj",adminCollectionObj)
+        app.set("userCartCollectionObj",userCartCollectionObj)
 
         console.log("database connected")
     }
@@ -89,5 +92,5 @@ app.use((err,req,res,next)=>{
 //app.use("/products",productApi)
 
 //assign port
-const port=8080;
+const port=process.env.PORT || 8080;
 app.listen(port,()=>console.log(`server running on port ${port} `))
